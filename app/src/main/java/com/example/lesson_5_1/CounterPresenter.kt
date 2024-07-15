@@ -1,40 +1,37 @@
 package com.example.lesson_5_1
-
-import android.view.View
-import android.widget.Toast
+import android.graphics.Color
 
 class CounterPresenter {
 
     private val model = CounterModel()
     private var view: CounterView? = null
-    private var toast = Toast.makeText(this, "Поздравляем!", Toast.LENGTH_SHORT)
 
-    fun incrementCount(){
+    fun incrementCount() {
         model.increment()
         view?.showCount(model.getResult())
+        checkConditions(model.getResult())
     }
 
-    fun decrementCount(){
+    fun decrementCount() {
         model.decrement()
         view?.showCount(model.getResult())
+        checkConditions(model.getResult())
     }
 
-    fun attachView(view:CounterView){
+    fun attachView(view: CounterView) {
         this.view = view
-        view?.showCount(model.getResult())
     }
 
-    fun showToast(view: CounterView){
-        if (view.toString() == "10"){
-            toast.show()
+    fun detachView() {
+        this.view = null
+    }
+
+    private fun checkConditions(value: Int) {
+        when (value) {
+            10 -> view?.showToast("Поздравляем!")
+            15 -> view?.changeTextColor(Color.GREEN)
+            else -> view?.changeTextColor(Color.BLACK)
         }
+
     }
-
-    fun condition15 (){
-        if (model.getResult() == "15"){
-            view.changeTextColor()
-        }
-    }
-
-
 }

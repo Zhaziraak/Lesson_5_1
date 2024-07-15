@@ -11,5 +11,5 @@ class CounterModel {
         count--
     }
 
-    fun getResult() = count.toString()
+    fun getResult() = count
 }

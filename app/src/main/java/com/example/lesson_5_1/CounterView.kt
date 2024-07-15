@@ -1,9 +1,10 @@
 package com.example.lesson_5_1
 
-import android.graphics.Color
-
 interface CounterView {
 
-    fun showCount(count: String)
+    fun showCount(count: Int)
+    fun showToast(message: String)
+    fun changeTextColor(color: Int)
+
 
 }

@@ -1,11 +1,8 @@
 package com.example.lesson_5_1
 
-import android.graphics.Color
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.lesson_5_1.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), CounterView {
@@ -30,11 +27,20 @@ class MainActivity : AppCompatActivity(), CounterView {
         }
     }
 
-    override fun showCount(count: String) {
-        binding.tvResult.text = count
+    override fun showCount(count: Int) {
+        binding.tvResult.text = count.toString()
     }
 
-    fun changeTextColor() {
-        binding.tvResult.setTextColor(Color.GREEN)
+    override fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun changeTextColor(color: Int) {
+        binding.tvResult.setTextColor(color)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView()
     }
 }
